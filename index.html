@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1.0">
+    <title>Jogo da Velha</title>
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon">
+    
+    <meta name="theme-color" content="#3498db"/>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icon-192.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="svg-background">
+        <svg width="100%" height="100%" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#343a40;stop-opacity:0.8" />
+              <stop offset="50%" style="stop-color:#6c757d;stop-opacity:0.6" />
+              <stop offset="100%" style="stop-color:#dee2e6;stop-opacity:0.4" />
+            </linearGradient>
+            
+            <linearGradient id="wave2" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#495057;stop-opacity:0.7" />
+              <stop offset="50%" style="stop-color:#adb5bd;stop-opacity:0.5" />
+              <stop offset="100%" style="stop-color:#f8f9fa;stop-opacity:0.3" />
+            </linearGradient>
+            
+            <linearGradient id="wave3" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#212529;stop-opacity:0.9" />
+              <stop offset="50%" style="stop-color:#868e96;stop-opacity:0.7" />
+              <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:0.5" />
+            </linearGradient>
+            
+            <linearGradient id="wave4" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" style="stop-color:#6c757d;stop-opacity:0.6" />
+              <stop offset="50%" style="stop-color:#ced4da;stop-opacity:0.4" />
+              <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.2" />
+            </linearGradient>
+            
+            <filter id="blur" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+            </filter>
+            
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+              <feMerge>
+                <feMergeNode in="coloredBlur"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          
+          <rect width="800" height="600" fill="url(#wave4)" opacity="0.3"/>
+          
+          <path d="M0,400 Q200,350 400,380 T800,360 L800,600 L0,600 Z" fill="url(#wave1)" filter="url(#blur)">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; -400,0; 0,0"
+              dur="20s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="d"
+              values="M0,400 Q200,350 400,380 T800,360 L800,600 L0,600 Z;
+                      M0,420 Q200,370 400,400 T800,380 L800,600 L0,600 Z;
+                      M0,400 Q200,350 400,380 T800,360 L800,600 L0,600 Z"
+              dur="8s"
+              repeatCount="indefinite"/>
+          </path>
+          
+          <path d="M0,450 Q150,400 300,430 T600,410 T800,420 L800,600 L0,600 Z" fill="url(#wave2)" filter="url(#glow)">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; 300,0; 0,0"
+              dur="15s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="d"
+              values="M0,450 Q150,400 300,430 T600,410 T800,420 L800,600 L0,600 Z;
+                      M0,470 Q150,420 300,450 T600,430 T800,440 L800,600 L0,600 Z;
+                      M0,450 Q150,400 300,430 T600,410 T800,420 L800,600 L0,600 Z"
+              dur="6s"
+              repeatCount="indefinite"/>
+          </path>
+          
+          <path d="M0,500 Q100,460 200,480 T400,470 T600,485 T800,475 L800,600 L0,600 Z" fill="url(#wave3)">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; -200,0; 0,0"
+              dur="12s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="d"
+              values="M0,500 Q100,460 200,480 T400,470 T600,485 T800,475 L800,600 L0,600 Z;
+                      M0,520 Q100,480 200,500 T400,490 T600,505 T800,495 L800,600 L0,600 Z;
+                      M0,500 Q100,460 200,480 T400,470 T600,485 T800,475 L800,600 L0,600 Z"
+              dur="10s"
+              repeatCount="indefinite"/>
+          </path>
+          
+          <path d="M0,530 Q80,500 160,520 T320,510 T480,525 T640,515 T800,520 L800,600 L0,600 Z" fill="url(#wave4)" filter="url(#glow)">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; 160,0; 0,0"
+              dur="8s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="d"
+              values="M0,530 Q80,500 160,520 T320,510 T480,525 T640,515 T800,520 L800,600 L0,600 Z;
+                      M0,540 Q80,510 160,530 T320,520 T480,535 T640,525 T800,530 L800,600 L0,600 Z;
+                      M0,530 Q80,500 160,520 T320,510 T480,525 T640,515 T800,520 L800,600 L0,600 Z"
+              dur="5s"
+              repeatCount="indefinite"/>
+          </path>
+          
+          <path d="M0,550 Q40,540 80,545 T160,540 T240,548 T320,542 T400,547 T480,541 T560,546 T640,540 T720,545 T800,542 L800,600 L0,600 Z"
+                fill="url(#wave1)" opacity="0.8">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; -80,0; 0,0"
+              dur="4s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="d"
+              values="M0,550 Q40,540 80,545 T160,540 T240,548 T320,542 T400,547 T480,541 T560,546 T640,540 T720,545 T800,542 L800,600 L0,600 Z;
+                      M0,555 Q40,545 80,550 T160,545 T240,553 T320,547 T400,552 T480,546 T560,551 T640,550 T720,550 T800,547 L800,600 L0,600 Z;
+                      M0,550 Q40,540 80,545 T160,540 T240,548 T320,542 T400,547 T480,541 T560,546 T640,540 T720,545 T800,542 L800,600 L0,600 Z"
+              dur="3s"
+              repeatCount="indefinite"/>
+          </path>
+          
+          <circle cx="100" cy="300" r="3" fill="#dee2e6" opacity="0.6">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; 50,-20; 100,0; 50,20; 0,0"
+              dur="12s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="opacity"
+              values="0.6; 1; 0.6; 1; 0.6"
+              dur="6s"
+              repeatCount="indefinite"/>
+          </circle>
+          
+          <circle cx="300" cy="250" r="2" fill="#adb5bd" opacity="0.7">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; -30,15; -60,0; -30,-15; 0,0"
+              dur="10s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="opacity"
+              values="0.7; 0.3; 0.7; 0.3; 0.7"
+              dur="4s"
+              repeatCount="indefinite"/>
+          </circle>
+          
+          <circle cx="500" cy="200" r="4" fill="#6c757d" opacity="0.5">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; 40,30; 80,0; 40,-30; 0,0"
+              dur="15s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="opacity"
+              values="0.5; 0.9; 0.5; 0.9; 0.5"
+              dur="8s"
+              repeatCount="indefinite"/>
+          </circle>
+          
+          <circle cx="700" cy="180" r="2.5" fill="#ced4da" opacity="0.8">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; -50,25; -100,0; -50,-25; 0,0"
+              dur="18s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="opacity"
+              values="0.8; 0.4; 0.8; 0.4; 0.8"
+              dur="5s"
+              repeatCount="indefinite"/>
+          </circle>
+          
+          <ellipse cx="200" cy="480" rx="30" ry="8" fill="#ffffff" opacity="0.3">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; 20,5; 0,0; -20,-5; 0,0"
+              dur="6s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="opacity"
+              values="0.3; 0.7; 0.3; 0.7; 0.3"
+              dur="4s"
+              repeatCount="indefinite"/>
+          </ellipse>
+          
+          <ellipse cx="600" cy="520" rx="25" ry="6" fill="#f8f9fa" opacity="0.4">
+            <animateTransform
+              attributeName="transform"
+              type="translate"
+              values="0,0; -15,3; 0,0; 15,-3; 0,0"
+              dur="8s"
+              repeatCount="indefinite"/>
+            <animate
+              attributeName="opacity"
+              values="0.4; 0.8; 0.4; 0.8; 0.4"
+              dur="6s"
+              repeatCount="indefinite"/>
+          </ellipse>
+        </svg>
+    </div>
+
+    <main class="game-container">
+        <h1 class="game-title">Jogo da Velha</h1>
+        
+        <div class="game-board">
+            <div data-cell-index="0" class="cell"></div>
+            <div data-cell-index="1" class="cell"></div>
+            <div data-cell-index="2" class="cell"></div>
+            <div data-cell-index="3" class="cell"></div>
+            <div data-cell-index="4" class="cell"></div>
+            <div data-cell-index="5" class="cell"></div>
+            <div data-cell-index="6" class="cell"></div>
+            <div data-cell-index="7" class="cell"></div>
+            <div data-cell-index="8" class="cell"></div>
+        </div>
+        
+        <h2 class="game-status"></h2>
+        
+        <button class="game-restart-button">Reiniciar Jogo</button>
+    </main>
+
+    <div id="resultOverlay" class="hidden">
+        <div class="result-message-box">
+            <img src="public/winning-trophy.png" alt="Troféu de vencedor" id="winningImage" class="hidden">
+            <p id="resultText"></p>
+            <button class="game-restart-button" style="backdrop-filter: blur(5px);">Jogar Novamente</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js');
+            });
+        }
+    </script>
+</body>
+</html>
